@@ -40,7 +40,7 @@ function Home() {
       }
     }
     load()
-  }, [])
+  }, [user])
 
   return (
     <Layout hasHeader>
