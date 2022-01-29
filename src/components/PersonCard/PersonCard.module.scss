@@ -1,0 +1,46 @@
+@import 'config/styles/vars.scss';
+
+.container {
+  background: $color-400;
+  padding: $space-400;
+  max-width: 360px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.thumbnail {
+  img {
+    width: 100%;
+  }
+}
+.meta {
+  padding: 8px 0;
+}
+.title {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 600;
+  margin-bottom: $space-100;
+  text-align: center;
+  a {
+    color: #fff;
+  }
+  @include breakpoint(tablet) {
+    font-size: 15px;
+  }
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  button {
+    display: flex;
+    justify-content: center;
+    width: 60px;
+    svg {
+      margin: 0 !important;
+    }
+    &:last-of-type {
+      margin-left: 16px;
+    }
+  }
+}
