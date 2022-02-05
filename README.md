@@ -1,30 +1,77 @@
 # match-me-with
 
-Another Tinder clone app developed in React with Firebase and FireStore integrations.
+Another Tinder clone app developed in React with Firebase integrations.
 
-## Available Scripts
+Live version is running here: https://match-me-with.vercel.app/ 
 
-In the project directory, you can run:
+## Prerequisites
 
-### `yarn start`
+In order to run this app we must have a Firebase project setup and collect related info to update environment variables.
+Firebase project offers lots of features but for this app we are using Authentication and Firestore Database.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Authentication: for user authentication
+- Firestore Database: to store user profile info
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Follow these steps here to get it ready:
 
-### `yarn test`
+- Go to https://console.firebase.google.com/u/0/ and create a new Firebase project
 
-Launches the test runner in the interactive watch mode.\
+    ![Firebase New Project](/resources/firebase-new.png)
+- Go to Project settings > General and copy these green-highlighted info
+
+    ![Firebase Env](/resources/firebase-env.png)
+- Copy and rename `.env.sample` to `.env` and populate the variables there with the Firebase info above
+
+Finally make sure the dependencies are installed by running this command from the root project directory:
+
+```
+yarn
+```
+
+It's ready!
+
+## Start development
+
+In the root project directory, run:
+
+```
+yarn start
+```
+
+The app will start in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Make edits and lint code
+
+During running in development mode, the page will reload if you make edits.
+
+You will also see any lint errors in the console. In order to manually check for linting errors, run:
+
+```
+yarn lint
+```
+
+## Run Test
+
+Test runner has been setup for this app. Launch it in the interactive watch mode by executing:
+
+```
+yarn test
+```
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## Deploy
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This app is being deployed by https://vercel.com/.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In order to have it run on Vercel:
+- Register a Vercel account and connect it with this Github repo
+- Select `Create React App` as the framework preset for Build & Development Settings (or set the build command to `yarn build`)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ![Vercel Setup](/resources/vercel-setup.png)
+
+- Make sure Vercel environment variables are updated
+
+    ![Vercel Env](/resources/vercel-env.png)
+
+That's it!
