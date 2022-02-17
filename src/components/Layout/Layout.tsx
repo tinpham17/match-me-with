@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import Header from 'components/Header/Header'
+import NavBar from 'components/NavBar/NavBar'
 import styles from './Layout.module.scss'
 
 type Props = {
@@ -16,6 +17,7 @@ function Layout(props: Props) {
       <div className={styles.body}>
         {props.children}
       </div>
+      <NavBar/>
     </>
   )
 }

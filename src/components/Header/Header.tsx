@@ -1,4 +1,5 @@
 import WelcomeForm from 'components/WelcomeForm/WelcomeForm'
+import { config } from 'config'
 import { useAuth } from 'context/auth'
 import { Link } from 'react-router-dom'
 import styles from './Header.module.scss'
@@ -8,7 +9,7 @@ function Header() {
   return (
     <header className={styles.container}>
       <div className={styles.branding}>
-        <Link to="/">Match Me With</Link>
+        <Link to={config.routes.explore}>Match Me With</Link>
       </div>
       {
         user && <WelcomeForm/>

@@ -12,7 +12,7 @@ function WelcomeForm() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Welcome {user?.email}</div>
+      <div className={styles.title}>Welcome {user?.profile?.name}</div>
       <button onClick={handleClickLogout}>
         <FontAwesomeIcon icon={faSignOutAlt}/>
         <span>Logout</span>

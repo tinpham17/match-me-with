@@ -1,4 +1,5 @@
 import Loader from 'components/Loader/Loader'
+import { config } from 'config'
 import { FormEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { register } from 'services'
@@ -83,7 +84,7 @@ function RegisterForm(props: Props) {
         </button>
       </form>
       <div className={styles.extra}>
-        <Link to="/home">Back</Link>
+        <Link to={config.routes.explore}>Back</Link>
       </div>
     </div>
   )

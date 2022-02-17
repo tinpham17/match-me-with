@@ -12,6 +12,12 @@ const config = {
     collection: {
       profiles: 'profiles'
     }
+  },
+  routes: {
+    login: '/login',
+    register: '/register',
+    explore: '/explore',
+    liked: '/liked'
   }
 }
 
