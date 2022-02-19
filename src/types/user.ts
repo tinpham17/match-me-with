@@ -18,3 +18,8 @@ export interface LoginRequestParams {
   email: string
   password: string
 }
+
+export interface InteractedProfiles {
+  likedProfiles: Profile[]
+  passedProfiles: Profile[]
+}

@@ -1,59 +1,45 @@
 import { useEffect, useState } from 'react'
-import { getProfiles } from 'services/user'
+import { getInteractedProfiles } from 'services/user'
 import Layout from 'components/Layout/Layout'
 import Loader from 'components/Loader/Loader'
-import PersonCard from 'components/PersonCard/PersonCard'
+import PersonList from 'components/PersonList/PersonList'
 import { Profile } from 'types/profile'
 import { useAuth } from 'context/auth'
+import { Link } from 'react-router-dom'
+import { config } from 'config'
 
 function Liked() {
   const [ loading, setLoading ] = useState(false)
-  const [ profiles, setProfiles ] = useState<Profile[]>([])
-  const [ visibleProfile, setVisibleProfile ] = useState<Profile | null>(null)
-  const [ liked, setLiked ] = useState<Profile[]>([])
+  const [ likedProfiles, setLikedProfiles ] = useState<Profile[]>([])
   const { user } = useAuth()
-
-  const handleLike = (value: boolean) => {
-    if (visibleProfile) {
-      if (value) {
-        setLiked([...liked, visibleProfile])
-      }
-      const newProfiles = [...profiles].filter((p) => p.id !== visibleProfile.id)
-      setProfiles(newProfiles)
-      setVisibleProfile(newProfiles[0])
-    }
-  }
 
   useEffect(() => {
     const load = async () => {
-      setLoading(true)
-      try {
-        const result = await getProfiles(user ? [user.id] : [])
-        setProfiles(result)
-        if (result[0]) {
-          setVisibleProfile(result[0])
+      if (user?.id) {
+        setLoading(true)
+        try {
+          const result = await getInteractedProfiles(user?.id)
+          setLikedProfiles(result.likedProfiles)
+        } catch (e) {
+          alert(e)
+        } finally {
+          setLoading(false)
         }
-      } catch (e) {
-        alert(e)
-      } finally {
-        setLoading(false)
       }
     }
     load()
   }, [user])
 
   return (
-    <Layout hasHeader>
+    <Layout hasHeader hasNavBar>
       <Loader loading={loading}/>
+      <PersonList profiles={likedProfiles}/>
       {
-        visibleProfile && <PersonCard profile={visibleProfile} onLike={(value) => handleLike(value)} />
-      }
-      {
-        (!loading && !profiles.length)
+        (!loading && !likedProfiles.length)
         &&
         <div style={{textAlign: 'center'}}>
-          <p>That's all</p>
-          <p>You liked {liked.length ? liked.map((p) => p.name).join(', ') : 'no one'}</p>
+          <p>Ops</p>
+          <p>You have not liked any profile yet. Let's <Link to={config.routes.explore}>explore</Link></p>
         </div>
       }
     </Layout>

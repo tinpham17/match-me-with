@@ -1,6 +1,32 @@
 @import 'config/styles/vars.scss';
 
+.container {
+  overflow: hidden;
+}
 .body {
   color: #fff;
   padding: $space-400;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.withHeader {
+  top: 64px;
+}
+.withNavBar {
+  bottom: 64px;
+}
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

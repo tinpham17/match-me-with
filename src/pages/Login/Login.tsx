@@ -1,4 +1,3 @@
-import Layout from 'components/Layout/Layout'
 import LoginForm from 'components/LoginForm/LoginForm'
 import { config } from 'config'
 import { useAuth } from 'context/auth'
@@ -12,9 +11,7 @@ function Login() {
   }
 
   return (
-    <Layout>
-      <LoginForm successRedirectUrl={config.routes.explore} />
-    </Layout>
+    <LoginForm successRedirectUrl={config.routes.explore} />
   )
 }
 export default Login

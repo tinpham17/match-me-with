@@ -1,26 +1,34 @@
 import { useEffect, useState } from 'react'
-import { getProfiles } from 'services/user'
+import { getProfiles, interactProfile } from 'services/user'
 import Layout from 'components/Layout/Layout'
 import Loader from 'components/Loader/Loader'
 import PersonCard from 'components/PersonCard/PersonCard'
 import { Profile } from 'types/profile'
 import { useAuth } from 'context/auth'
 
-function Home() {
+function Explore() {
   const [ loading, setLoading ] = useState(false)
   const [ profiles, setProfiles ] = useState<Profile[]>([])
   const [ visibleProfile, setVisibleProfile ] = useState<Profile | null>(null)
   const [ liked, setLiked ] = useState<Profile[]>([])
   const { user } = useAuth()
 
-  const handleLike = (value: boolean) => {
+  const handleLike = async (value: boolean) => {
     if (visibleProfile) {
-      if (value) {
-        setLiked([...liked, visibleProfile])
+      setLoading(true)
+      try {
+        await interactProfile(user?.id!, visibleProfile.id, value)
+        if (value) {
+          setLiked([...liked, visibleProfile])
+        }
+        const newProfiles = [...profiles].filter((p) => p.id !== visibleProfile.id)
+        setProfiles(newProfiles)
+        setVisibleProfile(newProfiles[0])
+      } catch(e) {
+        alert(e)
+      } finally {
+        setLoading(false)
       }
-      const newProfiles = [...profiles].filter((p) => p.id !== visibleProfile.id)
-      setProfiles(newProfiles)
-      setVisibleProfile(newProfiles[0])
     }
   }
 
@@ -43,7 +51,7 @@ function Home() {
   }, [user])
 
   return (
-    <Layout hasHeader>
+    <Layout hasHeader hasNavBar>
       <Loader loading={loading}/>
       {
         visibleProfile && <PersonCard profile={visibleProfile} onLike={(value) => handleLike(value)} />
@@ -59,4 +67,4 @@ function Home() {
     </Layout>
   )
 }
-export default Home
+export default Explore

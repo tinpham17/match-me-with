@@ -5,10 +5,15 @@ import styles from './PersonCard.module.scss'
 
 type Props = {
   profile: Profile
-  onLike: (value: boolean) => void
+  onLike?: (value: boolean) => void
 }
 
 function PersonCard(props: Props) {
+  const handleLike = (value: boolean) => {
+    if (props.onLike) {
+      props.onLike(value)
+    }
+  }
   return (
     <div className={styles.container}>
       <div className={styles.thumbnail}>
@@ -21,10 +26,10 @@ function PersonCard(props: Props) {
         </div>
       </div>
       <div className={styles.actions}>
-        <button onClick={() => props.onLike(true)}>
+        <button onClick={() => handleLike(true)}>
           <FontAwesomeIcon icon={faHeart}/>
         </button>
-        <button onClick={() => props.onLike(false)}>
+        <button onClick={() => handleLike(false)}>
           <FontAwesomeIcon icon={faTimes}/>
         </button>
       </div>

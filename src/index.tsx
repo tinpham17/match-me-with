@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { AuthProvider } from 'context/auth'
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute'
-import Home from 'pages/Home/Home'
+import Explore from 'pages/Explore/Explore'
 import Login from 'pages/Login/Login'
 import Liked from 'pages/Liked/Liked'
 import Register from 'pages/Register/Register'
@@ -18,7 +18,7 @@ ReactDOM.render(
         <Switch>
           <Route path={config.routes.login} exact component={Login} />
           <Route path={config.routes.register} exact component={Register} />
-          <PrivateRoute path={config.routes.explore} exact component={Home} redirectUrl={config.routes.login} />
+          <PrivateRoute path={config.routes.explore} exact component={Explore} redirectUrl={config.routes.login} />
           <PrivateRoute path={config.routes.liked} exact component={Liked} redirectUrl={config.routes.login} />
           <Route path="*">
             <Redirect to={config.routes.explore} />
